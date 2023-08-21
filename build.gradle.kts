@@ -18,6 +18,7 @@ repositories {
 }
 
 dependencies {
+    implementation("org.apache.commons:commons-email:1.5")
     implementation("io.ktor:ktor-serialization-kotlinx-json:2.3.3")
     implementation("io.ktor:ktor-server-content-negotiation:2.3.3")
     implementation("io.ktor:ktor-server-call-logging:2.3.3")
