@@ -13,12 +13,10 @@ fun main() {
 
 fun Application.module() {
     initialConfigs()
-    val emailHelper = EmailHelper(
-        UserAuth(
-            hostName = System.getenv("HOST_NAME"),
-            username = System.getenv("EMAIL_AUTH"),
-            password = System.getenv("PASSWORD")
-        )
+    val userAuth = UserAuth(
+        hostName = System.getenv("HOST_NAME"),
+        email = System.getenv("EMAIL_AUTH"),
+        password = System.getenv("PASSWORD")
     )
-    configureRouting(emailHelper)
+    configureRouting(EmailHelper(userAuth))
 }

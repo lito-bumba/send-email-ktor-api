@@ -20,9 +20,7 @@ fun Application.configureRouting(emailHelper: EmailHelper) {
         }
         get("/email-with-template") {
             try {
-                val htmlTemplateFile = getHtmlFromResource("EmailTemplate.html")
-                val htmlTemplate = htmlTemplateFile.replace("\$emailTo", sendTo)
-
+                val htmlTemplate = getHtmlFromResource("EmailTemplate.html")
                 emailHelper.sendEmailWithTemplate(
                     sendTo = sendTo,
                     subject = "Email with Template using Ktor Api",

@@ -5,21 +5,20 @@ import org.apache.commons.mail.SimpleEmail
 
 data class UserAuth(
     val hostName: String,
-    val username: String,
+    val email: String,
     val password: String
 )
 
 class EmailHelper(
     private val userAuth: UserAuth
 ) {
-
     fun sendSimpleEmail(sendTo: String, subject: String, message: String) {
         try {
             val email = SimpleEmail()
             email.hostName = userAuth.hostName
-            email.setAuthenticator(DefaultAuthenticator(userAuth.username, userAuth.password))
+            email.setAuthenticator(DefaultAuthenticator(userAuth.email, userAuth.password))
             email.isSSLOnConnect = true
-            email.setFrom(userAuth.username)
+            email.setFrom(userAuth.email)
             email.subject = subject
             email.setMsg(message)
             email.addTo(sendTo)
@@ -35,9 +34,9 @@ class EmailHelper(
         try {
             val htmlEmail = HtmlEmail()
             htmlEmail.hostName = userAuth.hostName
-            htmlEmail.setAuthenticator(DefaultAuthenticator(userAuth.username, userAuth.password))
+            htmlEmail.setAuthenticator(DefaultAuthenticator(userAuth.email, userAuth.password))
             htmlEmail.isSSLOnConnect = true
-            htmlEmail.setFrom(userAuth.username)
+            htmlEmail.setFrom(userAuth.email)
             htmlEmail.subject = subject
             htmlEmail.setMsg(htmlTemplate)
             htmlEmail.addTo(sendTo)
