@@ -10,8 +10,8 @@ fun Application.configureRouting(emailHelper: EmailHelper) {
             try {
                 emailHelper.sendSimpleEmail(
                     sendTo = sendTo,
-                    subject = "How To Send Email using Ktor Api",
-                    message = "It's simply using the Apache Commons Email Library"
+                    subject = "Simple Email using Ktor Api",
+                    message = "It get simple using the Apache Commons Email Library"
                 )
                 call.respond(HttpStatusCode.OK, "Simple Email Sent Successfully")
             } catch (exception: Exception) {
@@ -20,13 +20,12 @@ fun Application.configureRouting(emailHelper: EmailHelper) {
         }
         get("/email-with-template") {
             try {
-                val htmlTemplate = "<h1>It's simply using the Apache Commons Email Library</h1>" +
-                        "<p>Because with Kotin, everything get easy</p><br>" +
-                        "<img src=\"https://cafeinacodificada.com.br/wp-content/uploads/2019/02/kotlin.jpg\"/>"
+                val htmlTemplateFile = getHtmlFromResource("EmailTemplate.html")
+                val htmlTemplate = htmlTemplateFile.replace("\$emailTo", sendTo)
 
                 emailHelper.sendEmailWithTemplate(
                     sendTo = sendTo,
-                    subject = "How To Send Email using Ktor Api",
+                    subject = "Email with Template using Ktor Api",
                     htmlTemplate = htmlTemplate
                 )
                 call.respond(HttpStatusCode.OK, "Email with Template Sent Successfully")
