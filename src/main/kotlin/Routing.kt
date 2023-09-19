@@ -31,5 +31,21 @@ fun Application.configureRouting(emailHelper: EmailHelper) {
                 call.respondText("${exception.message}")
             }
         }
+        get("/email-with-new-template") {
+            try {
+                var htmlTemplate = getHtmlFromResource("NovoTemplate.html")
+                htmlTemplate = htmlTemplate
+                    .replace("\$name", sendTo)
+                    .replace("\$action", "http://localhost:8080/simple-email")
+                emailHelper.sendEmailWithTemplate(
+                    sendTo = sendTo,
+                    subject = "Email with New Template using Ktor Api",
+                    htmlTemplate = htmlTemplate
+                )
+                call.respond(HttpStatusCode.OK, "Email with Template Sent Successfully")
+            } catch (exception: Exception) {
+                call.respondText("${exception.message}")
+            }
+        }
     }
 }

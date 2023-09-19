@@ -26,6 +26,8 @@ dependencies {
     implementation("io.ktor:ktor-server-core-jvm:2.3.3")
     implementation("io.ktor:ktor-server-netty-jvm:2.3.3")
     implementation("ch.qos.logback:logback-classic:1.2.11")
-    testImplementation("io.ktor:ktor-server-tests-jvm:2.3.3")
-    testImplementation("org.jetbrains.kotlin:kotlin-test-junit:1.9.0")
+
+    testImplementation("io.ktor:ktor-server-test-host:2.3.3")
+    testImplementation("org.jetbrains.kotlin:kotlin-test:1.9.0")
+    testImplementation("io.mockk:mockk:1.13.7")
 }
